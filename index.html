@@ -742,19 +742,17 @@ function renderDay(day) {
           <h2>${day}${day===todayName?' — Today':''}</h2>
           <p>${SCHEDULE[day].length} sessions · ${Math.floor(totalT/60)}h${totalT%60?' '+totalT%60+'m':''} total</p>
           <div class="day-stats">
-            <div class="day-stats">
-              <div class="day-stat">
-                <span class="day-stat-val" id="stat-elapsed-${day}">${fmt(elapsedS)}</span>
-                <span class="day-stat-lbl">Studied</span>
-              </div>
-              <div class="day-stat">
-                <span class="day-stat-val" id="stat-remain-${day}">${remainM}m left</span>
-                <span class="day-stat-lbl">Remaining</span>
-              </div>
-              <div class="day-stat">
-                <span class="day-stat-val" id="stat-done-${day}">${doneCount}/${SCHEDULE[day].length}</span>
-                <span class="day-stat-lbl">Completed</span>
-              </div>
+            <div class="day-stat">
+              <span class="day-stat-val" id="stat-elapsed-${day}">${fmt(elapsedS)}</span>
+              <span class="day-stat-lbl">Studied</span>
+            </div>
+            <div class="day-stat">
+              <span class="day-stat-val" id="stat-remain-${day}">${remainM}m left</span>
+              <span class="day-stat-lbl">Remaining</span>
+            </div>
+            <div class="day-stat">
+              <span class="day-stat-val" id="stat-done-${day}">${doneCount}/${SCHEDULE[day].length}</span>
+              <span class="day-stat-lbl">Completed</span>
             </div>
           </div>
         </div>
@@ -824,6 +822,7 @@ function renderCard(day, s) {
 
 function renderAll() {
   const main = document.getElementById('mainContent');
+  if (!main) return;
   main.innerHTML = DAYS.map(d =>
     `<div style="display:${d===activeDay?'block':'none'}" id="container-${d}">${renderDay(d)}</div>`
   ).join('');
@@ -1087,7 +1086,7 @@ function resetAnalyticsData() {
   }
 }
 
-// ── INITIALIZATION EXECUTION HOOK ──
+// ── INIT ──
 window.addEventListener('DOMContentLoaded', () => {
   renderAll();
   setTimeout(initAnalyticsDashboards, 150);
