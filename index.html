@@ -707,6 +707,7 @@ function showToast(msg, type='') {
 // ── RENDER ────────────────────────────────────────────────────────────
 function renderTabs() {
   const nav = document.getElementById('dayTabs');
+  if (!nav) return;
   nav.innerHTML = DAYS.map(d => `
     <button class="day-tab ${d===activeDay?'active':''} ${d===todayName?'today':''}"
             onclick="switchDay('${d}')">
