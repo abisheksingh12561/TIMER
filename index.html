@@ -742,17 +742,19 @@ function renderDay(day) {
           <h2>${day}${day===todayName?' — Today':''}</h2>
           <p>${SCHEDULE[day].length} sessions · ${Math.floor(totalT/60)}h${totalT%60?' '+totalT%60+'m':''} total</p>
           <div class="day-stats">
-            <div class="day-stat">
-              <span class="day-stat-val" id="stat-elapsed-${day}">${fmt(elapsedS)}</span>
-              <span class="day-stat-lbl">Studied</span>
-            </div>
-            <div class="day-stat">
-              <span class="day-stat-val" id="stat-remain-${day}">${remainM}m left</span>
-              <span class="day-stat-lbl">Remaining</span>
-            </div>
-            <div class="day-stat">
-              <span class="day-stat-val" id="stat-done-${day}">${doneCount}/${SCHEDULE[day].length}</span>
-              <span class="day-stat-lbl">Completed</span>
+            <div class="day-stats">
+              <div class="day-stat">
+                <span class="day-stat-val" id="stat-elapsed-${day}">${fmt(elapsedS)}</span>
+                <span class="day-stat-lbl">Studied</span>
+              </div>
+              <div class="day-stat">
+                <span class="day-stat-val" id="stat-remain-${day}">${remainM}m left</span>
+                <span class="day-stat-lbl">Remaining</span>
+              </div>
+              <div class="day-stat">
+                <span class="day-stat-val" id="stat-done-${day}">${doneCount}/${SCHEDULE[day].length}</span>
+                <span class="day-stat-lbl">Completed</span>
+              </div>
             </div>
           </div>
         </div>
@@ -886,7 +888,6 @@ function unlockDone(day, sid) {
   updateDashboardCharts();
 }
 
-// Fixed reset handling to prevent crashing state metrics
 function resetTimer(day, sid) {
   const st = state[day][sid];
   if (st.running) clearInterval(st.intervalId);
@@ -972,7 +973,7 @@ function updateDayUI(day) {
   if (sd) sd.textContent = `${doneCount}/${SCHEDULE[day].length}`;
 }
 
-// ── CHARTS IMPLEMENTATION ──
+// ── CHARTS ENGINE ──
 let weeklyChartInstance = null;
 let pieChartInstance = null;
 
@@ -1086,9 +1087,11 @@ function resetAnalyticsData() {
   }
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────
-renderAll();
-setTimeout(initAnalyticsDashboards, 100);
+// ── INITIALIZATION EXECUTION HOOK ──
+window.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+  setTimeout(initAnalyticsDashboards, 150);
+});
 </script>
 </body>
 </html>
