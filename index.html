@@ -588,6 +588,7 @@ let activeTheme = localStorage.getItem('tt_theme') || 'navy';
 
 function buildThemeGrid() {
   const grid = document.getElementById('themeGrid');
+  if(!grid) return;
   grid.innerHTML = THEMES.map(t => `
     <div class="theme-swatch ${t.id === activeTheme ? 'active' : ''}"
          style="background:${t.dots[1]}; border-color:${t.id === activeTheme ? t.dots[2] : 'transparent'}"
@@ -699,6 +700,7 @@ function elapsedTotal(day) { return SCHEDULE[day].reduce((a,s)=>a+state[day][s.i
 
 function showToast(msg, type='') {
   const t = document.getElementById('toast');
+  if(!t) return;
   t.textContent = msg;
   t.className = 'toast show ' + type;
   setTimeout(()=>{ t.className='toast'; }, 3200);
@@ -832,9 +834,11 @@ function renderAll() {
 
 // ── ACTIONS ───────────────────────────────────────────────────────────
 function switchDay(day) {
-  document.getElementById('container-'+activeDay).style.display = 'none';
+  const prevContainer = document.getElementById('container-'+activeDay);
+  if(prevContainer) prevContainer.style.display = 'none';
   activeDay = day;
-  document.getElementById('container-'+activeDay).style.display = 'block';
+  const nextContainer = document.getElementById('container-'+activeDay);
+  if(nextContainer) nextContainer.style.display = 'block';
   renderTabs();
 }
 
@@ -846,13 +850,15 @@ function toggleTimer(day, sid) {
     clearInterval(st.intervalId);
     st.baseElapsed = st.elapsed;
     st.running = false;
-    document.getElementById(`startBtn-${day}-${sid}`).textContent = '▶ Start';
+    const btn = document.getElementById(`startBtn-${day}-${sid}`);
+    if(btn) btn.textContent = '▶ Start';
     saveStateToStorage();
     updateDashboardCharts();
   } else {
     st.running = true;
     st.startTime = Date.now();
-    document.getElementById(`startBtn-${day}-${sid}`).textContent = '⏸ Pause';
+    const btn = document.getElementById(`startBtn-${day}-${sid}`);
+    if(btn) btn.textContent = '⏸ Pause';
     
     st.intervalId = setInterval(()=>{
       const dynamicMs = Date.now() - st.startTime;
@@ -863,7 +869,8 @@ function toggleTimer(day, sid) {
         clearInterval(st.intervalId);
         st.running = false;
         st.baseElapsed = st.elapsed;
-        document.getElementById(`startBtn-${day}-${sid}`).textContent = '▶ Start';
+        const sBtn = document.getElementById(`startBtn-${day}-${sid}`);
+        if(sBtn) sBtn.textContent = '▶ Start';
         unlockDone(day, sid);
         showToast(`${SUBJECTS[sid].icon} ${SUBJECTS[sid].label} timer complete! Mark as Done to finish.`, 'warn');
       }
@@ -1087,10 +1094,10 @@ function resetAnalyticsData() {
   }
 }
 
-// ── INIT ──
+// Ensure interface layout renders completely before chart initialization triggers
 window.addEventListener('DOMContentLoaded', () => {
   renderAll();
-  setTimeout(initAnalyticsDashboards, 150);
+  setTimeout(initAnalyticsDashboards, 100);
 });
 </script>
 </body>
