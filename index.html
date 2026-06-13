@@ -15,7 +15,7 @@
     --accent:     #e8a020;
     --accent-dim: #c4881a;
     --text:       #f5f0e8;
-    --muted:      #8ca0b8;
+    --muted:      --muted;
     --white:      #ffffff;
     --border:     rgba(255,255,255,0.08);
     --border-h:   rgba(255,255,255,0.07);
@@ -135,7 +135,7 @@
     color: var(--white);
   }
   .header-text p {
-    color: var(--muted);
+    color: #8ca0b8;
     font-size: 0.82rem;
     margin-top: 3px;
   }
@@ -151,7 +151,7 @@
   .day-tab {
     background: none;
     border: none;
-    color: var(--muted);
+    color: #8ca0b8;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.82rem;
     font-weight: 500;
@@ -169,7 +169,7 @@
   .theme-btn {
     background: var(--bg-mid);
     border: 1px solid var(--border);
-    color: var(--muted);
+    color: #8ca0b8;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.78rem;
     font-weight: 500;
@@ -212,7 +212,7 @@
   }
   .theme-modal p {
     font-size: 0.78rem;
-    color: var(--muted);
+    color: #8ca0b8;
     margin-bottom: 20px;
   }
   .theme-grid {
@@ -248,7 +248,7 @@
     padding: 10px;
     background: var(--bg-light);
     border: 1px solid var(--border);
-    color: var(--muted);
+    color: #8ca0b8;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Space Grotesk', sans-serif;
@@ -298,12 +298,12 @@
     color: var(--white); line-height: 1;
   }
   .ring-sub {
-    font-size: 0.58rem; color: var(--muted);
+    font-size: 0.58rem; color: #8ca0b8;
     margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px;
   }
 
   .day-overview-info h2 { font-size: 1.2rem; font-weight: 700; color: var(--white); }
-  .day-overview-info > p { color: var(--muted); font-size: 0.82rem; margin-top: 3px; }
+  .day-overview-info > p { color: #8ca0b8; font-size: 0.82rem; margin-top: 3px; }
 
   .day-stats { display: flex; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
   .day-stat { display: flex; flex-direction: column; gap: 2px; }
@@ -312,7 +312,7 @@
     font-size: 0.95rem; font-weight: 600; color: var(--accent);
   }
   .day-stat-lbl {
-    font-size: 0.7rem; color: var(--muted);
+    font-size: 0.7rem; color: #8ca0b8;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
 
@@ -347,7 +347,7 @@
     font-size: 1.1rem; flex-shrink: 0;
   }
   .card-title { font-weight: 600; font-size: 0.95rem; color: var(--white); }
-  .card-subtitle { font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
+  .card-subtitle { font-size: 0.73rem; color: #8ca0b8; margin-top: 1px; }
 
   .card-badge {
     margin-left: auto; font-size: 0.68rem; font-weight: 600;
@@ -363,13 +363,13 @@
     display: flex; justify-content: space-between; align-items: baseline;
     margin-bottom: 8px;
   }
-  .progress-label span:first-child { font-size: 0.73rem; color: var(--muted); }
+  .progress-label span:first-child { font-size: 0.73rem; color: #8ca0b8; }
   .progress-label span:last-child {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.73rem; color: var(--accent); font-weight: 600;
   }
   .progress-bar-bg {
-    background: var(--progress-track);
+    background: rgba(255,255,255,0.08);
     border-radius: 99px; height: 6px; overflow: hidden;
   }
   .progress-bar-fill {
@@ -385,7 +385,7 @@
     letter-spacing: 2px; line-height: 1; margin-bottom: 4px;
   }
   .timer-target {
-    font-size: 0.72rem; color: var(--muted); margin-bottom: 14px;
+    font-size: 0.72rem; color: #8ca0b8; margin-bottom: 14px;
   }
 
   .timer-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -436,7 +436,7 @@
   /* Lock hint */
   .lock-hint {
     font-size: 0.68rem;
-    color: var(--muted);
+    color: #8ca0b8;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -472,7 +472,7 @@
     background: rgba(232,160,32,0.07);
     border: 1px solid rgba(232,160,32,0.18);
     border-radius: 10px; padding: 12px 16px;
-    font-size: 0.78rem; color: var(--muted);
+    font-size: 0.78rem; color: #8ca0b8;
     margin-top: 18px; line-height: 1.6;
   }
   .note-box strong { color: var(--accent); }
@@ -574,47 +574,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── THEMES ────────────────────────────────────────────────────────────
-const THEMES = [
-  { id: 'navy', name: 'Midnight Navy', sub: 'Dark · Default', dots: ['#0f1c2e','#1a2e48','#e8a020'], dotText: '#e8f0f8' },
-  { id: 'forest', name: 'Forest Moss', sub: 'Dark · Green', dots: ['#0d1f17','#162b1e','#5cbe7a'], dotText: '#e8f2eb' },
-  { id: 'plum', name: 'Deep Plum', sub: 'Dark · Purple', dots: ['#1a0f2e','#261a3f','#c084e8'], dotText: '#f0e8ff' },
-  { id: 'slate', name: 'Slate Dusk', sub: 'Dark · Blue-grey', dots: ['#1a1e26','#242935','#7eb8d4'], dotText: '#e2e8f0' },
-  { id: 'desert', name: 'Desert Ember', sub: 'Dark · Warm amber', dots: ['#1e160c','#2c2014','#d4914a'], dotText: '#f5ece0' },
-  { id: 'parchment', name: 'Warm Parchment', sub: 'Light · Sepia', dots: ['#f0e8d8','#e6dcc8','#8b4513'], dotText: '#2a1a0a' },
-];
-
-let activeTheme = localStorage.getItem('tt_theme') || 'navy';
-
-function buildThemeGrid() {
-  const grid = document.getElementById('themeGrid');
-  if(!grid) return;
-  grid.innerHTML = THEMES.map(t => `
-    <div class="theme-swatch ${t.id === activeTheme ? 'active' : ''}"
-         style="background:${t.dots[1]}; border-color:${t.id === activeTheme ? t.dots[2] : 'transparent'}"
-         onclick="applyTheme('${t.id}')">
-      <div class="swatch-dots">
-        ${t.dots.map(d => `<div class="swatch-dot" style="background:${d}"></div>`).join('')}
-      </div>
-      <div class="swatch-name" style="color:${t.dotText}">${t.name}</div>
-      <div class="swatch-sub" style="color:${t.dotText}">${t.sub}</div>
-    </div>
-  `).join('');
-}
-
-function applyTheme(id) {
-  activeTheme = id;
-  document.body.setAttribute('data-theme', id);
-  localStorage.setItem('tt_theme', id);
-  buildThemeGrid();
-  if (typeof weeklyChartInstance !== 'undefined' && weeklyChartInstance) updateChartColors();
-}
-
-function openTheme() { buildThemeGrid(); document.getElementById('themePanel').classList.add('open'); }
-function closeTheme() { document.getElementById('themePanel').classList.remove('open'); }
-document.getElementById('themePanel').addEventListener('click', function(e) { if (e.target === this) closeTheme(); });
-applyTheme(activeTheme);
-
 // ── DATA SETUP ────────────────────────────────────────────────────────
 const SUBJECTS = {
   history: { label:'History',        icon:'🏛️', cls:'s-history', color: '#c06b3a' },
@@ -1094,10 +1053,42 @@ function resetAnalyticsData() {
   }
 }
 
-// Ensure interface layout renders completely before chart initialization triggers
+// ── THEME ENGINES MODIFIED TO LOAD POST-INITIALIZATION ────────────────
+function buildThemeGrid() {
+  const grid = document.getElementById('themeGrid');
+  if(!grid) return;
+  grid.innerHTML = THEMES.map(t => `
+    <div class="theme-swatch ${t.id === activeTheme ? 'active' : ''}"
+         style="background:${t.dots[1]}; border-color:${t.id === activeTheme ? t.dots[2] : 'transparent'}"
+         onclick="applyTheme('${t.id}')">
+      <div class="swatch-dots">
+        ${t.dots.map(d => `<div class="swatch-dot" style="background:${d}"></div>`).join('')}
+      </div>
+      <div class="swatch-name" style="color:${t.dotText}">${t.name}</div>
+      <div class="swatch-sub" style="color:${t.dotText}">${t.sub}</div>
+    </div>
+  `).join('');
+}
+
+function applyTheme(id) {
+  activeTheme = id;
+  document.body.setAttribute('data-theme', id);
+  localStorage.setItem('tt_theme', id);
+  buildThemeGrid();
+  if (weeklyChartInstance && pieChartInstance) {
+    updateChartColors();
+  }
+}
+
+function openTheme() { buildThemeGrid(); document.getElementById('themePanel').classList.add('open'); }
+function closeTheme() { document.getElementById('themePanel').classList.remove('open'); }
+document.getElementById('themePanel').addEventListener('click', function(e) { if (e.target === this) closeTheme(); });
+
+// ── INIT ──
 window.addEventListener('DOMContentLoaded', () => {
   renderAll();
-  setTimeout(initAnalyticsDashboards, 100);
+  initAnalyticsDashboards();
+  applyTheme(activeTheme); // Now safely runs AFTER dashboards have been fully built!
 });
 </script>
 </body>
